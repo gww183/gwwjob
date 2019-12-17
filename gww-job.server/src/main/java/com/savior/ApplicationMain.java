@@ -1,6 +1,6 @@
 package com.savior;
 
-import com.savior.server.*;
+import com.savior.protocol.HttpProtocolServer;
 
 /**
  * @Auther: weiwe
@@ -10,8 +10,14 @@ import com.savior.server.*;
 public class ApplicationMain {
 
     public static void main(String[] arg) {
-        TimeServer timeServer = new TimeServer();
-        timeServer.bind(8899);
+        HttpProtocolServer httpProtocolServer = new HttpProtocolServer(8899);
+        try {
+            httpProtocolServer.createServer("/");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            httpProtocolServer.closeServer();
+        }
     }
 
 }
