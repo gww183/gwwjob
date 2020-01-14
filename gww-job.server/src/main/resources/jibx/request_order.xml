@@ -1,4 +1,4 @@
-<binding xmlns:ns1="http://savior.com/jibx/pojo" name="bind" package="com.savior.jibx.pojo">
+<binding xmlns:ns1="http://savior.com/jibx/pojo" name="request_order" package="com.savior.jibx.pojo">
   <namespace uri="http://savior.com/jibx/pojo" default="elements"/>
   <mapping abstract="true" type-name="ns1:order" class="com.savior.jibx.pojo.Order">
     <value style="attribute" name="orderNumber" field="orderNumber"/>
@@ -10,17 +10,6 @@
   <mapping class="com.savior.jibx.pojo.Order" name="order">
     <structure map-as="ns1:order"/>
   </mapping>
-  <mapping abstract="true" type-name="ns1:customer" class="com.savior.jibx.pojo.Customer">
-    <value style="attribute" name="customerNumber" field="customerNumber"/>
-    <value style="element" name="fistName" field="fistName" usage="optional"/>
-    <value style="element" name="lastName" field="lastName" usage="optional"/>
-    <collection field="middleNames" usage="optional" create-type="java.util.ArrayList">
-      <value name="middleName" type="java.lang.String"/>
-    </collection>
-  </mapping>
-  <mapping class="com.savior.jibx.pojo.Customer" name="customer">
-    <structure map-as="ns1:customer"/>
-  </mapping>
   <mapping abstract="true" type-name="ns1:address" class="com.savior.jibx.pojo.Address">
     <value style="element" name="street1" field="street1" usage="optional"/>
     <value style="element" name="street2" field="street2" usage="optional"/>
@@ -31,5 +20,16 @@
   </mapping>
   <mapping class="com.savior.jibx.pojo.Address" name="address">
     <structure map-as="ns1:address"/>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:customer" class="com.savior.jibx.pojo.Customer">
+    <value style="attribute" name="customerNumber" field="customerNumber"/>
+    <value style="element" name="fistName" field="fistName" usage="optional"/>
+    <value style="element" name="lastName" field="lastName" usage="optional"/>
+    <collection field="middleNames" usage="optional" create-type="java.util.ArrayList">
+      <value name="middleName" type="java.lang.String"/>
+    </collection>
+  </mapping>
+  <mapping class="com.savior.jibx.pojo.Customer" name="customer">
+    <structure map-as="ns1:customer"/>
   </mapping>
 </binding>

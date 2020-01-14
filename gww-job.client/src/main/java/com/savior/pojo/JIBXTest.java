@@ -1,4 +1,4 @@
-package com.savior.jibx.pojo;
+package com.savior.pojo;
 
 import org.jibx.binding.Compile;
 import org.jibx.runtime.BindingDirectory;
@@ -8,7 +8,6 @@ import org.jibx.runtime.IMarshallingContext;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
-import java.util.Arrays;
 
 /**
  * @Auther: weiwe
@@ -57,7 +56,7 @@ public class JIBXTest {
         args[0] = "-v";
 
         // 指定 binding 和 schema 文件的路径。必须
-        args[1] = "D:/project_java/gww_job/gww-job.server/src/main/resources/jibx/request_order.xml";
+        args[1] = "D:/project_java/gww_job/gww-job.client/src/main/resources/jibx/request_order.xml";
 
         Compile.main(args);
     }

@@ -1,4 +1,4 @@
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://savior.com/jibx/pojo" elementFormDefault="qualified" targetNamespace="http://savior.com/jibx/pojo">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://savior.com/pojo" elementFormDefault="qualified" targetNamespace="http://savior.com/pojo">
   <xs:element type="tns:address" name="address"/>
   <xs:complexType name="order">
     <xs:sequence>
