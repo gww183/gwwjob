@@ -1,4 +1,4 @@
-package com.savior.pojo;
+package com.savior.jibx.pojo;
 
 import org.jibx.binding.Compile;
 import org.jibx.runtime.BindingDirectory;

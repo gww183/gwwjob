@@ -1,16 +1,16 @@
-<binding xmlns:ns1="http://savior.com/pojo" name="request_order" package="com.savior.pojo">
-  <namespace uri="http://savior.com/pojo" default="elements"/>
-  <mapping abstract="true" type-name="ns1:order" class="com.savior.pojo.Order">
+<binding xmlns:ns1="http://savior.com/jibx/pojo" name="request_order" package="com.savior.jibx.pojo">
+  <namespace uri="http://savior.com/jibx/pojo" default="elements"/>
+  <mapping abstract="true" type-name="ns1:order" class="com.savior.jibx.pojo.Order">
     <value style="attribute" name="orderNumber" field="orderNumber"/>
     <structure map-as="ns1:customer" field="customer" usage="optional" name="customer"/>
     <structure map-as="ns1:address" field="billTo" usage="optional" name="billTo"/>
     <value style="element" name="shipping" field="shipping" usage="optional"/>
     <value style="attribute" name="total" field="total" usage="optional"/>
   </mapping>
-  <mapping class="com.savior.pojo.Order" name="order">
+  <mapping class="com.savior.jibx.pojo.Order" name="order">
     <structure map-as="ns1:order"/>
   </mapping>
-  <mapping abstract="true" type-name="ns1:address" class="com.savior.pojo.Address">
+  <mapping abstract="true" type-name="ns1:address" class="com.savior.jibx.pojo.Address">
     <value style="element" name="street1" field="street1" usage="optional"/>
     <value style="element" name="street2" field="street2" usage="optional"/>
     <value style="element" name="city" field="city" usage="optional"/>
@@ -18,10 +18,10 @@
     <value style="element" name="postCode" field="postCode" usage="optional"/>
     <value style="element" name="country" field="country" usage="optional"/>
   </mapping>
-  <mapping class="com.savior.pojo.Address" name="address">
+  <mapping class="com.savior.jibx.pojo.Address" name="address">
     <structure map-as="ns1:address"/>
   </mapping>
-  <mapping abstract="true" type-name="ns1:customer" class="com.savior.pojo.Customer">
+  <mapping abstract="true" type-name="ns1:customer" class="com.savior.jibx.pojo.Customer">
     <value style="attribute" name="customerNumber" field="customerNumber"/>
     <value style="element" name="fistName" field="fistName" usage="optional"/>
     <value style="element" name="lastName" field="lastName" usage="optional"/>
@@ -29,7 +29,7 @@
       <value name="middleName" type="java.lang.String"/>
     </collection>
   </mapping>
-  <mapping class="com.savior.pojo.Customer" name="customer">
+  <mapping class="com.savior.jibx.pojo.Customer" name="customer">
     <structure map-as="ns1:customer"/>
   </mapping>
 </binding>

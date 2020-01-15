@@ -1,6 +1,6 @@
 package com.savior;
 
-import com.savior.protocol.HttpProtocolServer;
+import com.savior.protocol.HttpXmlProtocolServer;
 
 /**
  * @Auther: weiwe
@@ -10,14 +10,16 @@ import com.savior.protocol.HttpProtocolServer;
 public class ApplicationMain {
 
     public static void main(String[] arg) {
-        HttpProtocolServer httpProtocolServer = new HttpProtocolServer(8899);
-        try {
-            httpProtocolServer.createServer("/");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            httpProtocolServer.closeServer();
-        }
+//        HttpProtocolServer httpProtocolServer = new HttpProtocolServer(8899);
+//        try {
+//            httpProtocolServer.createServer("/");
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } finally {
+//            httpProtocolServer.closeServer();
+//        }
+        HttpXmlProtocolServer httpXmlProtocolServer = new HttpXmlProtocolServer(8899);
+        httpXmlProtocolServer.createServer();
     }
 
 }

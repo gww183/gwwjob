@@ -1,5 +1,6 @@
 package com.savior.channelhandler;
 
+import com.savior.jibx.pojo.Order;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageDecoder;
@@ -22,7 +23,7 @@ public abstract class AbstractHttpXmlDecoder<T> extends MessageToMessageDecoder<
 
     private StringReader stringReader;
 
-    private Class<T> tClass;
+    private Class<?> tClass;
 
     private boolean isPrint;
 
@@ -30,26 +31,31 @@ public abstract class AbstractHttpXmlDecoder<T> extends MessageToMessageDecoder<
 
     private final static Charset UTF_8 = Charset.forName(CHARSET_NAME);
 
-    public AbstractHttpXmlDecoder(Class<T> tClass) {
+    public AbstractHttpXmlDecoder(Class<?> tClass) {
         this(tClass, false);
     }
 
-    public AbstractHttpXmlDecoder(Class<T> tClass, boolean isPrint) {
+    public AbstractHttpXmlDecoder(Class<?> tClass, boolean isPrint) {
         this.tClass = tClass;
         this.isPrint = isPrint;
     }
 
     protected Object decode0(ChannelHandlerContext ctx, ByteBuf byteBuf) throws JiBXException {
-        bindingFactory = BindingDirectory.getFactory(tClass);
-        String content = byteBuf.toString(UTF_8);
-        if (isPrint) {
-            System.out.println("The body is " + content);
+        Object result = null;
+        try {
+            bindingFactory = BindingDirectory.getFactory(tClass);
+            String content = byteBuf.toString(UTF_8);
+            if (isPrint) {
+                System.out.println("The body is " + content);
+            }
+            stringReader = new StringReader(content);
+            IUnmarshallingContext uctx = bindingFactory.createUnmarshallingContext();
+            result = uctx.unmarshalDocument(stringReader);
+            stringReader.close();
+            stringReader = null;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        stringReader = new StringReader(content);
-        IUnmarshallingContext uctx = bindingFactory.createUnmarshallingContext();
-        Object result = uctx.unmarshalDocument(stringReader);
-        stringReader.close();
-        stringReader = null;
         return result;
     }
 

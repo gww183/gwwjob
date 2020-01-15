@@ -1,4 +1,4 @@
-package com.savior.pojo;
+package com.savior.jibx.pojo;
 
 /**
  * @Auther: weiwe
@@ -55,4 +55,5 @@ public class Order {
     public void setTotal(Float total) {
         this.total = total;
     }
+
 }

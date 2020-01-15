@@ -2,7 +2,6 @@ package com.savior.channelhandler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
-import io.netty.handler.codec.http.HttpResponse;
 
 import java.util.List;
 

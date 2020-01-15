@@ -13,14 +13,18 @@ import java.util.List;
  * @Date: 2020/1/14 15:39
  * @Description:
  */
-public class HttpXmlRequestDecoder extends AbstractHttpXmlDecoder<DefaultFullHttpRequest> {
+public class HttpXmlRequestDecoder extends AbstractHttpXmlDecoder<FullHttpRequest> {
 
     public HttpXmlRequestDecoder(Class aClass) {
-        super(aClass);
+        this(aClass, false);
+    }
+
+    public HttpXmlRequestDecoder(Class<?> aClass, boolean isPrint) {
+        super(aClass, isPrint);
     }
 
     @Override
-    protected void decode(ChannelHandlerContext ctx, DefaultFullHttpRequest msg, List out) throws Exception {
+    protected void decode(ChannelHandlerContext ctx, FullHttpRequest msg, List out) throws Exception {
         if (!msg.decoderResult().isSuccess()) {
             sendError(ctx, HttpResponseStatus.BAD_REQUEST);
             return;

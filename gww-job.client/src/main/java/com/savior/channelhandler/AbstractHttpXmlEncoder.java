@@ -27,15 +27,20 @@ public abstract class AbstractHttpXmlEncoder<T> extends MessageToMessageEncoder<
     private final static Charset UTF_8 = Charset.forName(CHARSET_NAME);
 
     protected ByteBuf encode0(Object body) throws Exception {
-        factory = BindingDirectory.getFactory(body.getClass());
-        writer = new StringWriter();
-        IMarshallingContext mctx = factory.createMarshallingContext();
-        mctx.setIndent(2);
-        mctx.marshalDocument(body, CHARSET_NAME, null, writer);
-        String xmlStr = writer.toString();
-        writer.close();
-        writer = null;
-        return Unpooled.copiedBuffer(xmlStr, UTF_8);
+        try {
+            factory = BindingDirectory.getFactory(body.getClass());
+            writer = new StringWriter();
+            IMarshallingContext mctx = factory.createMarshallingContext();
+            mctx.setIndent(2);
+            mctx.marshalDocument(body, CHARSET_NAME, null, writer);
+            String xmlStr = writer.toString();
+            writer.close();
+            writer = null;
+            return Unpooled.copiedBuffer(xmlStr, UTF_8);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

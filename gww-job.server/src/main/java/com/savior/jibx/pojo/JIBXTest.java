@@ -1,9 +1,12 @@
 package com.savior.jibx.pojo;
 
+import io.netty.handler.codec.marshalling.UnmarshallerProvider;
 import org.jibx.binding.Compile;
 import org.jibx.runtime.BindingDirectory;
 import org.jibx.runtime.IBindingFactory;
 import org.jibx.runtime.IMarshallingContext;
+import org.jibx.runtime.IUnmarshallingContext;
+import org.jibx.runtime.impl.UnmarshallingContext;
 
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -24,8 +27,8 @@ public class JIBXTest {
     Charset charset = Charset.forName(charset_name);
 
     public static void main(String[] arg) {
-        compile();
-        /*Order order = new Order();
+//        compile();
+        Order order = new Order();
         order.setOrderNumber(10000);
         order.setShipping(Shipping.DOMESTIC_EXPRESS);
         Address address = new Address();
@@ -42,11 +45,13 @@ public class JIBXTest {
         customer.setMiddleNames(Arrays.asList("111", "222", "333"));
         order.setCustomer(customer);
         JIBXTest jibxTest = new JIBXTest();
+        String xmlStr = null;
         try {
-            jibxTest.encode(order);
+            xmlStr = jibxTest.encode(order);
+            jibxTest.decode(xmlStr);
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
 
@@ -62,7 +67,7 @@ public class JIBXTest {
         Compile.main(args);
     }
 
-    public void encode(Object object) throws Exception {
+    public String encode(Object object) throws Exception {
         bindingFactory = BindingDirectory.getFactory(Order.class);
         writer = new StringWriter();
         IMarshallingContext mctx = bindingFactory.createMarshallingContext();
@@ -71,6 +76,15 @@ public class JIBXTest {
         String xmlStr = writer.toString();
         writer.close();
         System.out.println(xmlStr);
+        return xmlStr;
+    }
+
+    public void decode(String xmlStr) throws Exception {
+        bindingFactory = BindingDirectory.getFactory(Order.class);
+        IUnmarshallingContext ucx = bindingFactory.createUnmarshallingContext();
+        StringReader stringReader = new StringReader(xmlStr);
+        Order order = (Order) ucx.unmarshalDocument(stringReader);
+        System.out.println("客户姓名： " + order.getCustomer().getFistName());
     }
 
 }

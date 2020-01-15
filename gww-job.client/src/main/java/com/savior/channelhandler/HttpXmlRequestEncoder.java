@@ -5,6 +5,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.*;
 
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.util.List;
 
 /**
@@ -17,12 +18,13 @@ public class HttpXmlRequestEncoder extends AbstractHttpXmlEncoder<HttpXmlRequest
 
     @Override
     public void encode(ChannelHandlerContext ctx, HttpXmlRequest msg, List out) throws Exception {
-        ByteBuf body = encode0(msg);
+        ByteBuf body = encode0(msg.getBody());
         FullHttpRequest request = msg.getRequest();
         if (request == null) {
             request = new DefaultFullHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.GET, "/do", body);
             HttpHeaders headers = request.headers();
-            headers.set(HttpHeaderNames.HOST, (CharSequence) InetAddress.getLocalHost());
+            String hostName = ((InetSocketAddress) ctx.channel().remoteAddress()).getHostName();
+            headers.set(HttpHeaderNames.HOST, "127.0.0.1");
             headers.set(HttpHeaderNames.CONNECTION, HttpHeaderValues.CLOSE);
             headers.set(HttpHeaderNames.ACCEPT_ENCODING, HttpHeaderValues.GZIP + "," + HttpHeaderValues.DEFLATE);
             headers.set(HttpHeaderNames.ACCEPT_CHARSET, "ISO-8859-1,utf-8;q=0.7,*;q=0.7");

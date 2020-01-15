@@ -1,6 +1,6 @@
 package com.savior;
 
-import com.savior.client.TimeServerClient;
+import com.savior.httpxml.HttpXmlClient;
 
 /**
  * @Auther: weiwe
@@ -10,8 +10,10 @@ import com.savior.client.TimeServerClient;
 public class ApplicationClientMain {
 
     public static void main(String[] arg) throws InterruptedException {
-        TimeServerClient timeServerClient = new TimeServerClient();
-        timeServerClient.connected(8899);
+       /* TimeServerClient timeServerClient = new TimeServerClient();
+        timeServerClient.connected(8899);*/
+        HttpXmlClient httpXmlClient = new HttpXmlClient(8899);
+        httpXmlClient.connection();
     }
 
 }

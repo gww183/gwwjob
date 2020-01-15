@@ -2,6 +2,7 @@ package com.savior.channelhandler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
+import io.netty.handler.codec.http.FullHttpResponse;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * @Date: 2020/1/14 17:34
  * @Description:
  */
-public class HttpXmlResponseDecoder extends AbstractHttpXmlDecoder<DefaultFullHttpResponse> {
+public class HttpXmlResponseDecoder extends AbstractHttpXmlDecoder<FullHttpResponse> {
 
     public HttpXmlResponseDecoder(Class<?>  tClass) {
         this(tClass, true);
@@ -21,7 +22,7 @@ public class HttpXmlResponseDecoder extends AbstractHttpXmlDecoder<DefaultFullHt
     }
 
     @Override
-    protected void decode(ChannelHandlerContext ctx, DefaultFullHttpResponse msg, List<Object> out) throws Exception {
+    protected void decode(ChannelHandlerContext ctx, FullHttpResponse msg, List<Object> out) throws Exception {
         HttpXmlResponse response = new HttpXmlResponse(msg, decode0(ctx, msg.content()));
         out.add(response);
     }

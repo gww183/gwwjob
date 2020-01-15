@@ -1,4 +1,4 @@
-package com.savior.pojo;
+package com.savior.jibx.pojo;
 
 /**
  * @Auther: weiwe
