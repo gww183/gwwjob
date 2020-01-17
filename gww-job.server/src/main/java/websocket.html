@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    Netty WebSocket
+</head>
+<body>
+<br>
+<form onsubmit="return false;">
+    <input type="text" name="message" value="netty 时间">
+    <br/>
+    <input type="button" value="发送" onclick="send(this.form.message.value)">
+    <input type="button" value="关闭连接" onclick="clo()">
+    <input type="button" value="重新连接" onclick="reConnect()">
+    <br color="red">
+    <h3>服务器应答信息</h3>
+    <textarea id="responseText"></textarea>
+</form>
+<script type="text/javascript">
+    var socket;
+    if (!window.WebSocket) {
+        window.WebSocket = window.MozWebSocket;
+    }
+    if (window.WebSocket) {
+        socket = new WebSocket("ws://localhost:8899/websocket")
+        handleSocket(socket)
+    } else {
+        alert("浏览器不支持webSocket协议")
+    }
+
+    function handleSocket(socket) {
+        if(socket.readyState == WebSocket.CONNECTING) {
+            var ta = document.getElementById('responseText')
+            ta.value=""
+            ta.value="连接中……"
+        }
+        socket.onmessage = function(event) {
+            var ta = document.getElementById('responseText')
+            ta.value=""
+            ta.value=event.data
+        }
+        socket.onopen = function(event) {
+             var ta = document.getElementById('responseText')
+            ta.value=""
+            ta.value="已经打开"
+        }
+        socket.onclose = function(event) {
+         var ta = document.getElementById('responseText')
+            ta.value=""
+            ta.value="已经关闭"
+            // alert("连接关闭");
+        }
+    }
+
+    function reConnect() {
+        if(!window.WebSocket) {
+            return;
+        }
+        if(socket.readyState != WebSocket.CLOSED) {
+            return;
+        } else {
+            socket = new WebSocket("ws://localhost:8899/websocket");
+            handleSocket(socket)
+        }
+    }
+
+    function send(message) {
+        if(!window.WebSocket) {
+            return;
+        }
+        if(socket.readyState == WebSocket.OPEN) {
+            socket.send(message);
+        } else {
+            alert("WEBSOCKET 连接没有建立成功")
+        }
+    }
+
+    function clo() {
+        if(!window.WebSocket) {
+            return;
+        }
+        if(socket.readyState == WebSocket.CLOSED) {
+            alert("连接已经关闭")
+        }else {
+            var ta = document.getElementById('responseText')
+            ta.value = ""
+            ta.value="正在关闭……"
+            socket.close()
+        }
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,6 +1,7 @@
 package com.savior;
 
 import com.savior.protocol.HttpXmlProtocolServer;
+import com.savior.websocket.WebSocketServer;
 
 /**
  * @Auther: weiwe
@@ -18,8 +19,10 @@ public class ApplicationMain {
 //        } finally {
 //            httpProtocolServer.closeServer();
 //        }
-        HttpXmlProtocolServer httpXmlProtocolServer = new HttpXmlProtocolServer(8899);
-        httpXmlProtocolServer.createServer();
+       /* HttpXmlProtocolServer httpXmlProtocolServer = new HttpXmlProtocolServer(8899);
+        httpXmlProtocolServer.createServer();*/
+        WebSocketServer webSocketServer = new WebSocketServer(8899);
+        webSocketServer.connection();
     }
 
 }
