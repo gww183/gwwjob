@@ -1,7 +1,6 @@
 package com.savior;
 
-import com.savior.protocol.HttpXmlProtocolServer;
-import com.savior.websocket.WebSocketServer;
+import com.savior.udpprotocle.ChineseProverServer;
 
 /**
  * @Auther: weiwe
@@ -21,8 +20,11 @@ public class ApplicationMain {
 //        }
        /* HttpXmlProtocolServer httpXmlProtocolServer = new HttpXmlProtocolServer(8899);
         httpXmlProtocolServer.createServer();*/
-        WebSocketServer webSocketServer = new WebSocketServer(8899);
-        webSocketServer.connection();
+//        WebSocketServer webSocketServer = new WebSocketServer(8899);
+//        webSocketServer.connection();
+        ChineseProverServer chineseProverServer = new ChineseProverServer(8899);
+        chineseProverServer.createServer();
+
     }
 
 }
